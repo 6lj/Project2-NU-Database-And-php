@@ -1,16 +1,19 @@
-PHP Html Parser
+How Make Database Work in Our Project 
 ==========================
+Download:
+[VScode](https://code.visualstudio.com/) , 
+ [php 8.4.4 ](https://www.php.net/downloads.php) , 
+[Xampp 8.2.12](https://www.apachefriends.org/download.html)
 
-[![VScode](https://travis-ci.org/paquettg/php-html-parser.png)]([https://travis-ci.org/paquettg/php-html-parser](https://code.visualstudio.com/))
-[![php 8.4.4 ](https://coveralls.io/repos/paquettg/php-html-parser/badge.png)]([https://coveralls.io/r/paquettg/php-html-parser](https://www.php.net/downloads.php))
-[![Xampp 8.2.12](https://scrutinizer-ci.com/g/paquettg/php-html-parser/badges/quality-score.png?b=master)]([https://scrutinizer-ci.com/g/paquettg/php-html-parser/?branch=master](https://www.apachefriends.org/download.html))
+This project is the result of the effort of a group of Najran University students, graduates of the year 2025. The system aims to transform the appointment booking process from the traditional manual system to an integrated automatic system.
 
-PHPHtmlParser is a simple, flexible, html parser which allows you to select tags using any css selector, like jQuery. The goal is to assist in the development of tools which require a quick, easy way to scrap html, whether it's valid or not!
-
-Install
+VScode
 -------
 
-Install the latest version using composer.
+Install the latest version 
+![vscode]([http://url/to/img.png](https://i.ibb.co/F4p11xbP/Screenshot-2025-02-19-005704.png))
+
+
 
 ```bash
 $ composer require paquettg/php-html-parser
