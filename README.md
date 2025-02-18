@@ -1,9 +1,9 @@
 PHP Html Parser
 ==========================
 
-[![Build Status](https://travis-ci.org/paquettg/php-html-parser.png)](https://travis-ci.org/paquettg/php-html-parser)
-[![Coverage Status](https://coveralls.io/repos/paquettg/php-html-parser/badge.png)](https://coveralls.io/r/paquettg/php-html-parser)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/paquettg/php-html-parser/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/paquettg/php-html-parser/?branch=master)
+[![VScode](https://travis-ci.org/paquettg/php-html-parser.png)]([https://travis-ci.org/paquettg/php-html-parser](https://code.visualstudio.com/))
+[![php 8.4.4 ](https://coveralls.io/repos/paquettg/php-html-parser/badge.png)]([https://coveralls.io/r/paquettg/php-html-parser](https://www.php.net/downloads.php))
+[![Xampp 8.2.12](https://scrutinizer-ci.com/g/paquettg/php-html-parser/badges/quality-score.png?b=master)]([https://scrutinizer-ci.com/g/paquettg/php-html-parser/?branch=master](https://www.apachefriends.org/download.html))
 
 PHPHtmlParser is a simple, flexible, html parser which allows you to select tags using any css selector, like jQuery. The goal is to assist in the development of tools which require a quick, easy way to scrap html, whether it's valid or not!
 
