@@ -2,7 +2,7 @@ How Make Database Work in Our Project
 ==========================
 Download:
 [VScode](https://code.visualstudio.com/) , 
- [php 8.4.4 ](https://www.php.net/downloads.php) , 
+ [php 8.4 ]([https://www.php.net/downloads.php](https://windows.php.net/download#php-8.4)) , 
 [Xampp 8.2.12](https://www.apachefriends.org/download.html)
 
 This project is the result of the effort of a group of Najran University students, graduates of the year 2025. The system aims to transform the appointment booking process from the traditional manual system to an integrated automatic system.
@@ -10,9 +10,20 @@ This project is the result of the effort of a group of Najran University student
 VScode
 -------
 
-Install the latest version 
-![vscode]([http://url/to/img.png](https://i.ibb.co/F4p11xbP/Screenshot-2025-02-19-005704.png))
+1- Download the latest version [VScode](https://code.visualstudio.com/)
 
+![vscode](https://i.ibb.co/F4p11xbP/Screenshot-2025-02-19-005704.png)
+
+2- install
+
+![vscode](https://i.ibb.co/wrFRbr2Z/Screenshot-2025-02-19-005753.png)
+![vscode](https://i.ibb.co/Kpmv6Hnx/Screenshot-2025-02-19-010724.png)
+
+3- Open Folder to see Codes in path
+![vscode](https://i.ibb.co/276QqY7s/Screenshot-2025-02-19-010934.png)
+
+php
+-------
 
 
 ```bash
