@@ -1,0 +1,190 @@
+/*  CSS CODE OR Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tajawal', Arial, sans-serif;
+    direction: rtl;
+}
+
+.top-bar {
+    background-color: #1a335c;
+    color: white;
+    padding: 8px 0;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 20px;
+    align-items: center;
+}
+
+.login-btn {
+    margin-right: auto;
+    background: #c49b3c;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background: #b38a2d;
+}
+
+.top-bar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.header {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    height: 60px;
+}
+
+.nav {
+    margin-right: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #1a335c;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.main-content {
+    background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+    min-height: calc(100vh - 180px);
+    position: relative;
+    padding: 40px 20px;
+    overflow: hidden;
+}
+
+.wave-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23e6f0fa' fill-opacity='1' d='M0,160L48,154.7C96,149,192,139,288,154.7C384,171,480,213,576,213.3C672,213,768,171,864,160C960,149,1056,171,1152,186.7C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+    background-size: cover;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.arabic-title {
+    color: #c49b3c;
+    font-size: 48px;
+    text-align: right;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.arabic-subtitle {
+    color: #1a335c;
+    font-size: 24px;
+    text-align: right;
+    margin: 20px 0;
+    line-height: 1.5;
+}
+
+.portal-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    position: relative;
+    z-index: 2;
+}
+
+.portal-button {
+    background: #1a335c;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 4px;
+    font-size: 18px;
+    text-align: center;
+    min-width: 300px;
+    transition: background-color 0.3s;
+    font-family: 'Tajawal', Arial, sans-serif;
+}
+
+.portal-button:hover {
+    background: #234374;
+}
+
+.accessibility-button {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background: #1a335c;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+    
+    .arabic-title {
+        font-size: 36px;
+    }
+    
+    .arabic-subtitle {
+        font-size: 20px;
+    }
+
+    .portal-button {
+        min-width: 100%;
+    }
+
+    .top-bar-content {
+        flex-wrap: wrap;
+    }
+
+    .login-btn {
+        margin-right: 0;
+        width: 100%;
+        text-align: center;
+        order: -1;
+        margin-bottom: 10px;
+    }
+}
