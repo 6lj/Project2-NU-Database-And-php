@@ -19,40 +19,80 @@ VScode
 ![vscode](https://i.ibb.co/wrFRbr2Z/Screenshot-2025-02-19-005753.png)
 ![vscode](https://i.ibb.co/Kpmv6Hnx/Screenshot-2025-02-19-010724.png)
 
-3- Open Folder to see Codes in path
+3- Open Folder to see Codes in path 
 
 ![vscode](https://i.ibb.co/276QqY7s/Screenshot-2025-02-19-010934.png)
 
-php
--------
+YOU CAN NOW EDIT CODE
 
+[php 8.4 ](https://windows.php.net/download#php-8.4)
+-------
+1- Create floder name php in C, C:\
+
+![](https://i.ibb.co/1YdwFW0N/Screenshot-2025-02-19-012023.png)
+
+2- Search
+
+![](https://i.ibb.co/FL83yBGc/Screenshot-2-19-2025-3-38-23-PM.png)
+
+3- edit
+
+![](https://i.ibb.co/JWgyRgBF/Environment-Variables-2-19-2025-3-29-32-PM.png)
+
+4- click new then C:\php then OK
+
+![](https://i.ibb.co/7dhN8fNn/Edit-environment-variable-2-19-2025-3-33-16-PM.png)
+
+go to cmd enter , should apper Verion of php
 
 ```bash
-$ composer require paquettg/php-html-parser
+$ php -v
 ```
+if you have error install [Microsoft Visual C++](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170)
 
-This package can be found on [packagist](https://packagist.org/packages/paquettg/php-html-parser) and is best loaded using [composer](http://getcomposer.org/). We support php 7.2, 7.3, and 7.4.
 
-Basic Usage
+![](https://i.ibb.co/sdg6Vxn3/Screenshot-2025-02-19-160532.png)
+
+
+[Xampp 8.2.12](https://www.apachefriends.org/download.html)
 -----
+1- If you find this message, just ignore it
 
-You can find many examples of how to use the DOM parser and any of its parts (which you will most likely never touch) in the tests directory. The tests are done using PHPUnit and are very small, a few lines each, and are a great place to start. Given that, I'll still be showing a few examples of how the package should be used. The following example is a very simplistic usage of the package.
+![](https://i.postimg.cc/26d8cYb7/Warning-2-19-2025-4-18-31-PM.png)
 
-```php
-// Assuming you installed from Composer:
-require "vendor/autoload.php";
-use PHPHtmlParser\Dom;
+2- install , click next for all defult settings
 
-$dom = new Dom;
-$dom->loadStr('<div class="all"><p>Hey bro, <a href="google.com">click here</a><br /> :)</p></div>');
-$a = $dom->find('a')[0];
-echo $a->text; // "click here"
+![](https://i.postimg.cc/QCKLYGMd/Setup-2-19-2025-4-23-34-PM.png)
+
+3- click allow for network , And make like photo
+
+![](https://i.postimg.cc/QCKLYGMd/Setup-2-19-2025-4-23-34-PM.png)
+
+Go to Shell
+enter
+```
+// cd YOUR PATH FOLDER PROJECT
+```
+then
+```
+// php -S loacalhost:ANYFORNUMBER
 ```
 
-The above will output "click here". Simple, no? There are many ways to get the same result from the DOM, such as `$dom->getElementsbyTag('a')[0]` or `$dom->find('a', 0)`, which can all be found in the tests or in the code itself.
+![](https://i.postimg.cc/Dy4VhXKp/XAMPP-for-Windows-php-S-localhost-6666-2-19-2025-4-39-48-PM.png)
 
-Support PHP Html Parser Financially
+then copy url and put in any browser
+
+
+[phpmyadmin](http://localhost/phpmyadmin)
 --------------
+1- go to [http://localhost/phpmyadmin/](http://localhost/phpmyadmin/)
+
+2- go to import 
+![](https://i.postimg.cc/0r4B4mxS/Screenshot-2025-02-19-160532.png)
+3- select folder project file name *Database.sql*
+![](https://i.postimg.cc/kB8fhpTr/Screenshot-2025-02-19-165451.png)
+
+go to url localhost 
 
 Get supported Monolog and help fund the project with the [Tidelift Subscription](https://tidelift.com/subscription/pkg/packagist-paquettg-php-html-parser?utm_source=packagist-paquettg-php-html-parser&utm_medium=referral&utm_campaign=enterprise).
 
