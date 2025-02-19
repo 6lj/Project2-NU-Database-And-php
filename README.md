@@ -106,4 +106,4 @@ go to url localhost then you can show how database works with phpmyadmin
 
 ![](https://i.postimg.cc/hhpX55f1/Screenshot-2025-02-19-170840.png)
 
-BT ENDUP 
+By ENDUP 
