@@ -2,7 +2,7 @@ How Make Database Work in Our Project
 ==========================
 Download:
 [VScode](https://code.visualstudio.com/) , 
-[php 8.4 ]([https://www.php.net/downloads.php](https://windows.php.net/download#php-8.4)) , 
+[php 8.4 ](https://windows.php.net/download#php-8.4) , 
 [Xampp 8.2.12](https://www.apachefriends.org/download.html)
 
 This project is the result of the effort of a group of Najran University students, graduates of the year 2025. The system aims to transform the appointment booking process from the traditional manual system to an integrated automatic system.
