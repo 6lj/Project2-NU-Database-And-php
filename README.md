@@ -47,7 +47,7 @@ YOU CAN NOW EDIT CODE
 go to cmd enter , should apper Verion of php
 
 ```bash
-$ php -v
+php -v
 ```
 if you have error install [Microsoft Visual C++](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170)
 
@@ -76,11 +76,11 @@ if you have error install [Microsoft Visual C++](https://learn.microsoft.com/en-
 Go to Shell
 enter
 ```
-// cd YOUR PATH FOLDER PROJECT
+cd YOUR PATH FOLDER PROJECT
 ```
 then
 ```
-// php -S loacalhost:ANYFORNUMBER
+php -S loacalhost:ANYFORNUMBER
 ```
 
 ![](https://i.postimg.cc/Dy4VhXKp/XAMPP-for-Windows-php-S-localhost-6666-2-19-2025-4-39-48-PM.png)
