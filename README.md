@@ -64,6 +64,8 @@ if you have error install [Microsoft Visual C++](https://learn.microsoft.com/en-
 
 
 2- install , click next for all defult settings
+
+
 ![](https://i.postimg.cc/QCKLYGMd/Setup-2-19-2025-4-23-34-PM.png)
 
 
@@ -72,6 +74,7 @@ if you have error install [Microsoft Visual C++](https://learn.microsoft.com/en-
 
 
 ![](https://i.postimg.cc/mkSCrmgd/XAMPP-Control-Panel-v3-3-0-Compiled-Apr-6th-2021-2-19-2025-4-32-30-PM.png)
+
 
 Go to Shell
 enter
