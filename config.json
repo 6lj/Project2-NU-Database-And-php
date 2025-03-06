@@ -1,8 +1,8 @@
 {
-    "database": {
-      "host": "localhost",
-      "user": "root",
-      "password": "",
-      "dbname": "appointment_db"
-    }
+  "database": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "dbname": "appointment_db"
   }
+}

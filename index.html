@@ -6,17 +6,27 @@
     <title>نظام جدولة وحجز المواعيد</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
+    <style>
+        .portal-button {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 10px;
+            background-color: #063261;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .portal-button:hover {
+            background-color: #033469;
+        }
+    </style>
 <body>
     <div class="top-bar">
         <div class="top-bar-content">
-       <!--<a  <a href="#" class="top-bar-link">حجز موعد</a>  a>-->
-            
-            <!--<a href="#" class="top-bar-link">المواعيد السابقة</a>-->
             <a href="profile.html" class="top-bar-link">الملف الشخصي</a>
             <a href="help.html" class="top-bar-link">المساعدة</a>
-            <!--<a href="#" class="top-bar-link">English</a>-->
-             <!--<a href="Reg.html" class="login-btn">تسجيل الدخول</a>-->
         </div>
     </div>
     
@@ -43,10 +53,25 @@
         <div class="portal-container">
             <a href="appointment.html" class="portal-button">حجز موعد طبي</a>
             <a href="tr.html" class="portal-button">متدرب</a>
-            <a href="admin.html" class="portal-button">المشرف</a>
+            
+            <!-- زر المشرف يظهر فقط إذا كان المستخدم مشرفًا -->
+            <div id="adminButtonContainer"></div>
         </div>
     </main>
 
-    
+    <script>
+        // تحقق من الدور المحفوظ في localStorage
+        const userRole = localStorage.getItem('userRole');
+
+        // إذا كان الدور "مشرف"، قم بإنشاء زر للمشرف
+        if (userRole === 'مشرف') {
+            const adminButton = document.createElement('a');
+            adminButton.href = 'admin.html';
+            adminButton.className = 'portal-button';
+            adminButton.textContent = 'المشرف';
+            document.getElementById('adminButtonContainer').appendChild(adminButton);
+        }
+    </script>
+
 </body>
 </html>

@@ -23,8 +23,9 @@ $data = json_decode($json, true);
 
 $email = $data['email'];
 $username = $data['username'];
-$password = $data['password']; // Keep the password as is, no hashing
+$password = $data['password']; 
 $phone = $data['phone'];
+$role = $data['role']; // استلام نوع المستخدم
 
 // Check if username already exists using a prepared statement
 $check_sql = "SELECT * FROM users WHERE username = ?";
@@ -34,23 +35,22 @@ $check_stmt->execute();
 $check_result = $check_stmt->get_result();
 
 if ($check_result->num_rows > 0) {
-    echo "exists";
+    echo "exists"; // اسم المستخدم موجود بالفعل
 } else {
     // Prepare SQL statement for insertion
-    $sql = "INSERT INTO users (email, username, password, phone) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO users (email, username, password, phone, role) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
-    // Bind parameters and specify their types
-    $stmt->bind_param("ssss", $email, $username, $password, $phone); 
+    // Bind parameters
+    $stmt->bind_param("sssss", $email, $username, $password, $phone, $role); 
 
     if ($stmt->execute()) {
-        echo "success";
+        echo "success"; 
     } else {
         echo "Error: " . $stmt->error;
     }
     $stmt->close();
 }
-//  By ENDUP
 
 $check_stmt->close();
 $conn->close();

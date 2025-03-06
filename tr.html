@@ -25,7 +25,6 @@
 <body>
     <div class="top-bar">
         <div class="top-bar-content">
-            
             <a href="profile.html" class="top-bar-link">الملف الشخصي</a>
             <a href="help.html" class="top-bar-link">المساعدة</a>
         </div>
@@ -45,7 +44,7 @@
     </header>
 
     <main class="main-content">
-        <h1 class="arabic-title">قائمة المتدربين</h1>
+        <h1 class="arabic-title">قائمة المتدربين </h1>
         <div class="portal-container">
             <table>
                 <thead>
@@ -53,7 +52,7 @@
                         <th>الاسم</th>
                         <th>رقم الجوال</th>
                         <th>الموعد</th>
-                        <th>المتدرب</th>
+                        <th>المريض</th>
                     </tr>
                 </thead>
                 <tbody id="appointments-body">
@@ -64,29 +63,38 @@
 
     <script>
         function loadAssignments() {
-            fetch('get_assignments.php')
-            .then(response => response.json())
-            .then(data => {
-                const appointmentsBody = document.getElementById('appointments-body');
-                let html = '';
+            fetch('accept_trainee.php') // Fetch from the accept_trainee.php script
+                .then(response => response.json())
+                .then(data => {
+                    const appointmentsBody = document.getElementById('appointments-body');
+                    let html = '';
 
-                data.forEach(assignment => {
-                    html += `
-                        <tr>
-                            <td>${assignment.name}</td>
-                            <td>${assignment.phone}</td>
-                            <td>${assignment.appointment}</td>
-                            <td>${assignment.trainee}</td>
-                        </tr>
-                    `;
+                    // Check if data is empty and handle it
+                    if (data.length === 0) {
+                        html = `<tr><td colspan="4">لا توجد بيانات متاحة</td></tr>`;
+                    } else {
+                        data.forEach(assignment => {
+                            html += `
+                                <tr>
+                                    <td>${assignment.name}</td>
+                                    <td>${assignment.phone}</td>
+                                    <td>${assignment.appointment}</td>
+                                    <td>${assignment.patient_name}</td> <!-- تم تحديث الحقل هنا -->
+                                </tr>
+                            `;
+                        });
+                    }
+
+                    appointmentsBody.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const appointmentsBody = document.getElementById('appointments-body');
+                    appointmentsBody.innerHTML = `<tr><td colspan="4">حدث خطأ أثناء تحميل البيانات.</td></tr>`;
                 });
-
-                appointmentsBody.innerHTML = html;
-            })
-            .catch(error => console.error('Error:', error));
         }
 
-        window.onload = loadAssignments;
+        window.onload = loadAssignments; // Call loadAssignments when the window loads
     </script>
 </body>
 </html>

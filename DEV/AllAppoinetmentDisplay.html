@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض المواعيد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        #appointments {
+            max-height: 400px; /* Adjust height as needed */
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;  /* Subtle background */
+        }
+        .appointment-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <a href="Support.html" class="top-bar-link">عرض الرسائل</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <img src="https://i.ibb.co/rMTRPrD/IMG-8440.jpg" alt="New Logo" class="logo" style="margin-bottom: 10px;">
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">الرئيسية</a>
+                <a href="../sur.html" class="nav-link">الأقسام</a>
+                <a href="../contact.html" class="nav-link">تواصل معنا</a>
+                <a href="../ab.html" class="nav-link">عن النظام</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
+            <h1 class="arabic-title">عرض المواعيد</h1>
+            <p class="arabic-subtitle">المواعيد:</p>
+            <div id="appointments">
+                <!-- مواعيد سيتم عرضها هنا -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function displayAppointments() {
+            fetch('retrieve_appointments.php') // Make sure to create this file
+                .then(response => response.json())
+                .then(data => {
+                    const appointmentsContainer = document.getElementById('appointments');
+                    appointmentsContainer.innerHTML = ''; // Clear any existing content
+
+                    if (data.length === 0) {
+                        appointmentsContainer.textContent = 'لا توجد مواعيد.';
+                    } else {
+                        data.forEach(appointment => {
+                            const appointmentDiv = document.createElement('div');
+                            appointmentDiv.classList.add('appointment-item');
+                            appointmentDiv.innerHTML = `
+                                <p><strong>الاسم:</strong> ${appointment.username}</p>
+                                <p><strong>البريد الإلكتروني:</strong> ${appointment.email}</p>
+                                <p><strong>الهاتف:</strong> ${appointment.phone}</p>
+                                <p><strong>رقم الموعد:</strong> ${appointment.appointment_id}</p>
+                                <p><strong>التاريخ:</strong> ${appointment.date}</p>
+                                <p><strong>الوقت:</strong> ${appointment.time}</p>
+                                <p><strong>القسم:</strong> ${appointment.department}</p>
+                                <p><strong>الحالة:</strong> ${appointment.status}</p>
+                            `;
+                            appointmentsContainer.appendChild(appointmentDiv);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching appointments:', error);
+                    const appointmentsContainer = document.getElementById('appointments');
+                    appointmentsContainer.textContent = 'حدث خطأ أثناء استرجاع المواعيد.'; // error handling
+                });
+        }
+
+        // Call the function to display appointments when the page loads
+        displayAppointments();
+    </script>
+</body>
+</html>

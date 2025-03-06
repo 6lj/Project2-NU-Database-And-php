@@ -235,7 +235,7 @@
                 { time: '18:00', available: true }
             ];
 
-            // Load existing appointments from localStorage
+           
             const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
             let bookedTimes = appointments.filter(app => app.date === date && app.department === department).map(app => app.time);
 
@@ -294,42 +294,50 @@
             sendAppointmentToServer(appointment);
         });
 
-        // Function to save appointment locally
-        function saveAppointmentLocally(appointment) {
-            const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
-            appointments.push(appointment);
-            localStorage.setItem('appointments', JSON.stringify(appointments));
-            // Optionally, immediately update UI here (e.g., show the appointment number)
-        }
+      // Function to save appointment locally
+function saveAppointmentLocally(appointment) {
+    const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+    
+    // Check if the number of appointments is less than 3
+    if (appointments.length < 3) {
+        appointments.push(appointment);
+        localStorage.setItem('appointments', JSON.stringify(appointments));
+        // Optionally, immediately update UI here (e.g., show the appointment number)
+    } else {
+        displayErrorMessage("يمكنك حجز ثلاث مواعيد فقط.");
+    }
+}
 
 
-        // Function to send appointment data to the server
-        function sendAppointmentToServer(appointment) {
-            fetch('save-appointment.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(appointment)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    displayErrorMessage(data.error);
-                    // If the server save failed, remove from local storage
-                    removeAppointmentLocally(appointment.id); // Remove the appointment from localStorage
-                } else {
-                    appointmentIdSpan.textContent = appointment.id;
-                    appointmentNumberDiv.style.display = 'block';
-                    displaySuccessMessage(data.message);
-                }
-            })
-            .catch(error => {
-                displayErrorMessage("An unexpected error occurred.");
-                // If there's a network error, remove appointment from local storage.
-                removeAppointmentLocally(appointment.id);
-            });
+function sendAppointmentToServer(appointment) {
+    fetch('save-appointment.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(appointment)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            displayErrorMessage(data.error);
+            removeAppointmentLocally(appointment.id); // Remove the appointment from localStorage
+        } else {
+            appointmentIdSpan.textContent = appointment.id;
+            appointmentNumberDiv.style.display = 'block';
+            displaySuccessMessage(data.message);
+
+            
+            setTimeout(() => {
+                window.location.href = 'DEV/save.html';
+            }, 0);
         }
+    })
+    .catch(error => {
+        displayErrorMessage("An unexpected error occurred.");
+        removeAppointmentLocally(appointment.id);
+    });
+}
 
         function removeAppointmentLocally(appointmentId) {
             let appointments = JSON.parse(localStorage.getItem('appointments')) || [];

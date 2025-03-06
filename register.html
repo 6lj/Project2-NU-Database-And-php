@@ -101,6 +101,15 @@
                 <div class="form-group">
                     <input type="text" id="phone" name="phone" placeholder="رقم الجوال" required>
                 </div>
+                <div class="form-group">
+                    <label for="role">نوع المستخدم:</label>
+                    <select id="role" name="role" required>
+                        <option value="">اختر نوع المستخدم</option>
+                        <option value="مريض">مريض</option>
+                        <option value="متدرب">متدرب</option>
+                        <option value="مشرف">مشرف</option>
+                    </select>
+                </div>
                 <button type="submit">تسجيل</button>
             </form>
             <p style="margin-top: 15px;">لديك حساب بالفعل؟ <a href="login.html">سجل الدخول</a></p>
@@ -115,9 +124,13 @@
                 email: document.getElementById('email').value,
                 username: document.getElementById('username').value,
                 password: document.getElementById('password').value,
-                phone: document.getElementById('phone').value
+                phone: document.getElementById('phone').value,
+                role: document.getElementById('role').value // إضافة الرول
             };
-            
+
+            // حفظ الدور في localStorage
+            localStorage.setItem('userRole', user.role);
+
             fetch('register.php', {
                 method: 'POST',
                 headers: {
@@ -129,7 +142,7 @@
             .then(data => {
                 if (data === 'success') {
                     alert('تم التسجيل بنجاح');
-                    window.location.href = 'login.html';
+                    window.location.href = 'login.html'; 
                 } else if (data === 'exists') {
                     alert('اسم المستخدم موجود بالفعل');
                 } else {

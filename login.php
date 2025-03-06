@@ -1,14 +1,5 @@
 <?php
-// Configuration
-$config = array(
-    "database" => array(
-        "host" => "localhost",
-        "user" => "root",
-        "password" => "",
-        "dbname" => "appointment_db"
-    )
-);
-
+$config = json_decode(file_get_contents("config.json"), true);
 // Extract the database settings
 $db_config = $config["database"];
 $host = $db_config["host"];
@@ -49,7 +40,7 @@ if ($result->num_rows > 0) {
     exit;
 } else {
    // By ENDUP
-    echo "Invalid username or password";
+   header('Location: login.html?error=invalid');
     exit;
 }
 
