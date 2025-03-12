@@ -1,5 +1,6 @@
 <?php
 $config = json_decode(file_get_contents("config.json"), true);
+
 // Extract the database settings
 $db_config = $config["database"];
 $host = $db_config["host"];
@@ -21,12 +22,12 @@ $password = $_POST['password'];
 
 // Check if username and password are empty
 if (empty($username) || empty($password)) {
-    echo "Please fill in all fields";
+    echo json_encode(["status" => "error", "message" => "Please fill in all fields."]);
     exit;
 }
 
 // Prepare SQL statement for login
-$sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+$sql = "SELECT role FROM users WHERE username = ? AND password = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $username, $password);
 $stmt->execute();
@@ -36,11 +37,21 @@ if ($result->num_rows > 0) {
     // Login successful
     session_start();
     $_SESSION['username'] = $username;
-    header('Location: index.html');
+
+    // Fetch user's role
+    $user = $result->fetch_assoc();
+    $_SESSION['role'] = $user['role'];
+
+    // Redirect based on role
+    if ($_SESSION['role'] === "مشرف") {
+        header('Location: admin.html');
+    } else {
+        header('Location: index.html');
+    }
     exit;
 } else {
-   // By ENDUP
-   header('Location: login.html?error=invalid');
+    // Redirect on invalid login
+    header('Location: login.html?error=invalid');
     exit;
 }
 

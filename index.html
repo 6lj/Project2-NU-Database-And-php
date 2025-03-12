@@ -54,16 +54,16 @@
             <a href="appointment.html" class="portal-button">حجز موعد طبي</a>
             <a href="tr.html" class="portal-button">متدرب</a>
             
-            <!-- زر المشرف يظهر فقط إذا كان المستخدم مشرفًا -->
+            
             <div id="adminButtonContainer"></div>
         </div>
     </main>
 
     <script>
-        // تحقق من الدور المحفوظ في localStorage
+      
         const userRole = localStorage.getItem('userRole');
 
-        // إذا كان الدور "مشرف"، قم بإنشاء زر للمشرف
+     
         if (userRole === 'مشرف') {
             const adminButton = document.createElement('a');
             adminButton.href = 'admin.html';
