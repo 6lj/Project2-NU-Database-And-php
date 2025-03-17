@@ -69,55 +69,46 @@
             color: red;
             margin-top: 10px;
         }
-
-        .admin-button {
-            display: inline-block;
-            margin-left: 10px;
-            padding: 5px 10px; /* تقليل الحجم لأبعاد أصغر */
-            background-color: #c49b3c; /* اللون الذهبي */
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 14px; /* تقليل حجم الخط ليكون أصغر */
-        }
-        
-        .admin-button:hover {
-            background-color: #b19629; /* لون الزر عند التحويم */
-        }
     </style>
+    
+    <script src="track_visitor.js"></script>
+
     <script>
         window.onload = function() {
             // احصل على عنوان URL الحالي
             const urlParams = new URLSearchParams(window.location.search);
             const error = urlParams.get('error');
-            
+
             // تحقق مما إذا كان خطأ "invalid" موجود
             if (error === 'invalid') {
                 // ابحث عن عنصر رسالة الخطأ وعرضه
                 const errorMessage = document.getElementById('error-message');
                 errorMessage.style.display = 'block';
             }
-
-            // الحصول على دور المستخدم من التخزين المحلي
-            const userRole = localStorage.getItem('userRole');
-
-            // تحقق إذا كان المستخدم مشرف
-            if (userRole === 'مشرف') {
-                const adminButton = document.createElement('a');
-                adminButton.href = 'admin.html';
-                adminButton.className = 'admin-button';
-                adminButton.textContent = 'المشرف';
-                document.getElementById('adminButtonContainer').appendChild(adminButton);
-            }
         }
     </script>
+
 </head>
 <body>
     <div class="top-bar">
         <div class="top-bar-content">
             <a href="index.html" class="top-bar-link">الصفحة الرئيسية</a>
             <a href="register.html" class="login-btn">تسجيل</a>
-            <div id="adminButtonContainer"></div> <!-- Admin button will appear here -->
+        
+            <a href="#" onclick="toggleLanguage();" class="lang-button">English</a>
+                
+                
+            <style>
+                .nav-link, .lang-button {
+                    cursor: pointer; /* Ensure the cursor is a pointer for all clickable elements */
+                    text-decoration: none; /* Remove the underline */
+                    color: inherit; /* Optional: inherits the text color from the parent */
+                }
+            
+                .nav-link:hover, .lang-button:hover {
+                    text-decoration: underline; /* Optional: Add underline on hover, if desired */
+                }
+            </style>
         </div>
     </div>
 
@@ -147,7 +138,14 @@
             </form>
             <p style="margin-top: 15px;">ليس لديك حساب؟ <a href="register.html">سجل الآن</a></p>
             <p class="forgot-password"><a href="forgot_password.html">نسيت كلمة السر؟ اضغط هنا</a></p>
+            <div id="adminButtonContainer"></div>
         </div>
     </main>
+ 
+    <script>
+        
+       
+    </script>
+       <script src="translate.js"></script>
 </body>
 </html>

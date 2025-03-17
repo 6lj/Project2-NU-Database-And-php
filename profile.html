@@ -80,6 +80,7 @@
             background-color: #b38a2b;
         }
     </style>
+     <script src="track_visitor.js"></script> 
 </head>
 
 <body>
@@ -98,6 +99,18 @@
                 <a href="sur.html" class="nav-link">الأقسام</a>
                 <a href="contact.html" class="nav-link">تواصل معنا</a>
                 <a href="ab.html" class="nav-link">عن النظام</a>
+                <a href="#" onclick="toggleLanguage();" class="lang-button">English</a>
+                <style>
+                    .nav-link, .lang-button {
+                        cursor: pointer; /* Ensure the cursor is a pointer for all clickable elements */
+                        text-decoration: none; /* Remove the underline */
+                        color: inherit; /* Optional: inherits the text color from the parent */
+                    }
+
+                        .nav-link:hover, .lang-button:hover {
+                            text-decoration: underline; /* Optional: Add underline on hover, if desired */
+                        }
+                </style>
             </nav>
         </div>
     </header>
@@ -106,7 +119,7 @@
         <h2>الملف الشخصي</h2>
 
         <div class="info-display">
-        
+
 
             <p><strong>اسم المستخدم:</strong> <span id="display-username"></span></p>
             <p><strong>البريد الإلكتروني:</strong> <span id="display-email"></span></p>
@@ -144,33 +157,34 @@
             document.getElementById('display-phone').textContent = user.phone;
         }
 
-       
+
         function loadAppointments() {
-        const appointmentList = document.getElementById('appointment-list');
-        appointmentList.innerHTML = ''; // Clear existing appointments
+            const appointmentList = document.getElementById('appointment-list');
+            appointmentList.innerHTML = ''; // Clear existing appointments
 
-        const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 
-        console.log("Appointments loaded in profile.html:", appointments);
+            console.log("Appointments loaded in profile.html:", appointments);
 
-        if (appointments.length > 0) {
-            appointments.forEach(appointment => {
-                const item = document.createElement('div');
-                item.className = 'appointment-item';
-                item.innerHTML = `
-                    <h4>رقم الموعد: ${appointment.id}</h4>
-                    <p>التاريخ: ${appointment.date ? appointment.date : 'غير محدد'}</p>
-                    <p>الوقت: ${appointment.time ? appointment.time : 'غير محدد'}</p>
-                    <p>القسم: ${appointment.department ? appointment.department : 'غير محدد'}</p>
-                    <p>الحالة: ${appointment.status ? appointment.status : 'غير محدد'}</p>
-                `;
-                appointmentList.appendChild(item);
-            });
-        } else {
-            appointmentList.innerHTML = '<p>لا توجد مواعيد محجوزة.</p>';
+            if (appointments.length > 0) {
+                appointments.forEach(appointment => {
+                    const item = document.createElement('div');
+                    item.className = 'appointment-item';
+                    item.innerHTML = `
+                        <h4>رقم الموعد: ${appointment.id}</h4>
+                        <p>التاريخ: ${appointment.date ? appointment.date : 'غير محدد'}</p>
+                        <p>الوقت: ${appointment.time ? appointment.time : 'غير محدد'}</p>
+                        <p>القسم: ${appointment.department ? appointment.department : 'غير محدد'}</p>
+                        <p>الحالة: ${appointment.status ? appointment.status : 'غير محدد'}</p>
+                    `;
+                    appointmentList.appendChild(item);
+                });
+            } else {
+                appointmentList.innerHTML = '<p>لا توجد مواعيد محجوزة.</p>';
+            }
         }
-    }
     </script>
+    <script src="translate.js"></script>
 </body>
 
 </html>

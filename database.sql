@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS help_messages (
     message TEXT,
     date DATE
 );
-CREATE TABLE appointmentdevkit (
+CREATE TABLE IF NOT EXISTS appointmentdevkit (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -47,17 +47,14 @@ CREATE TABLE appointmentdevkit (
     time TIME NOT NULL,
     department VARCHAR(100) NOT NULL,
     status VARCHAR(50) NOT NULL,
-    UNIQUE KEY unique_appointment (appointment_id, date, time)  
+    UNIQUE KEY unique_appointment (appointment_id, date, time)
 );
-CREATE TABLE appointmentdevkit (
+CREATE TABLE IF NOT EXISTS DeleteRequest (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    appointment_id VARCHAR(50) NOT NULL,
     username VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    appointment_id VARCHAR(50) NOT NULL,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
     department VARCHAR(100) NOT NULL,
-    status VARCHAR(50) NOT NULL,
-    UNIQUE KEY unique_appointment (appointment_id, date, time)  
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

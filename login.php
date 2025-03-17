@@ -22,7 +22,7 @@ $password = $_POST['password'];
 
 // Check if username and password are empty
 if (empty($username) || empty($password)) {
-    echo json_encode(["status" => "error", "message" => "Please fill in all fields."]);
+    echo json_encode(["status" => "error", "message" => ""]);
     exit;
 }
 
@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
 
     // Redirect based on role
     if ($_SESSION['role'] === "مشرف") {
-        header('Location: admin.html');
+        header('Location: index.html/supervisor');
     } else {
         header('Location: index.html');
     }

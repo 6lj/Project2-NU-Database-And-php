@@ -20,7 +20,7 @@
             height: 100%;
         }
 
-        .login-form-container {
+        .login-form-container, .terms-content {
             text-align: center;
             width: 100%;
             max-width: 400px;
@@ -38,7 +38,8 @@
         input[type="text"],
         input[type="password"],
         input[type="phone"],
-        input[type="email"] {
+        input[type="email"],
+        select {
             width: 100%;
             padding: 15px;
             font-size: 16px;
@@ -50,7 +51,8 @@
 
         input[type="text"]:focus,
         input[type="password"]:focus,
-        input[type="email"]:focus {
+        input[type="email"]:focus,
+        select:focus {
             border-color: #007bff;
             outline: none;
         }
@@ -63,18 +65,53 @@
             background-color: #c49b3c;
             color: white;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #c49b3c;
+            background-color: #b39c3f; /* لون أغمق عند المرور على الزر */
+        }
+
+        .terms {
+            margin-top: 30px;
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .terms-checkbox {
+            margin: 15px 0;
+            text-align: right;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
         }
     </style>
+     <script src="track_visitor.js"></script> 
 </head>
 <body>
     <div class="top-bar">
         <div class="top-bar-content">
             <a href="Reg.html" class="top-bar-link">الصفحة الرئيسية</a>
             <a href="login.html" class="login-btn">تسجيل الدخول</a>
+
+            <a href="#" onclick="toggleLanguage();" class="lang-button">English</a>
+
+
+            <style>
+                .nav-link, .lang-button {
+                    cursor: pointer; /* Ensure the cursor is a pointer for all clickable elements */
+                    text-decoration: none; /* Remove the underline */
+                    color: inherit; /* Optional: inherits the text color from the parent */
+                }
+
+                    .nav-link:hover, .lang-button:hover {
+                        text-decoration: underline; /* Optional: Add underline on hover, if desired */
+                    }
+            </style>
         </div>
     </div>
 
@@ -85,47 +122,158 @@
     </header>
 
     <main class="main-content">
-        <div class="login-form-container">
+        <div class="login-form-container" id="registerFormContainer">
             <h1 class="arabic-title">التسجيل</h1>
             <p class="arabic-subtitle">يرجى إدخال بياناتك لتسجيل جديد إلى النظام</p>
             <form id="registerForm">
                 <div class="form-group">
                     <input type="email" id="email" name="email" placeholder="البريد الالكتروني" required>
+                    <div id="emailError" class="error-message"></div>
                 </div>
                 <div class="form-group">
                     <input type="text" id="username" name="username" placeholder="اسم المستخدم" required>
+                    <div id="usernameError" class="error-message"></div>
                 </div>
                 <div class="form-group">
                     <input type="password" id="password" name="password" placeholder="كلمة السر" required>
+                    <div id="passwordError" class="error-message"></div>
                 </div>
                 <div class="form-group">
                     <input type="text" id="phone" name="phone" placeholder="رقم الجوال" required>
+                    <div id="phoneError" class="error-message"></div>
                 </div>
                 <div class="form-group">
-                    <label for="role">نوع المستخدم:</label>
+                    <label for="role">:</label>
                     <select id="role" name="role" required>
-                        <option value="">اختر نوع المستخدم</option>
+                        <option value="">اختر </option>
                         <option value="مريض">مريض</option>
                         <option value="متدرب">متدرب</option>
                         <option value="مشرف">مشرف</option>
                     </select>
                 </div>
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="termsCheckbox" required>
+                    <label for="termsCheckbox">أوافق على <a href="#" id="termsLink">الشروط والأحكام</a></label>
+                </div>
                 <button type="submit">تسجيل</button>
             </form>
             <p style="margin-top: 15px;">لديك حساب بالفعل؟ <a href="login.html">سجل الدخول</a></p>
         </div>
+
+        <div class="terms-content" id="termsContent" style="display: none;">
+            <h2>الشروط والأحكام</h2>
+            <p>1 يحق لنا رؤية جميع بياناتك المدخلة في النظام واستخدامها لأغراض تقديم الخدمات</p>
+            <p>2 استخدام بيانات مغلوطة قد يعرضك للمسائلة القانونية</p>
+            <p>3 لا يحق لك مسائلتنا قانونيًا بأي شكل من الأشكال</p>
+            <p>4 في حال سرقتك للكود أو الفكرة، يحق لنا مسائلتك بشكل قانوني</p>
+            <p>5 نحتفظ بالحق في تغيير هذه الشروط والأحكام في أي وقت</p>
+            <p>6 العبث بالنظام أو محاولة الهجوم يحق لنا مسائلتك بشكل قانوني وحجرك من دخول خدماتنا</p>
+            <p>7 انتحال العمل لأي جهة معنية دون أخذ موافقة المطورين يعرضك للمسائلة القانونية</p>
+            <p>8 يجب عليك استخدام هذا النظام فقط للأغراض المصرح بها وعدم استخدامه لأغراض غير قانونية</p>
+            <p>9 في حال حدوث أي خرق لهذه الشروط، يحق لنا إنهاء حسابك دون إشعار مسبق</p>
+            <p>10 نحتفظ بحقنا في اتخاذ الإجراءات القانونية اللازمة ضد أي انتهاك لهذه الشروط</p>
+            <p>11 يحق لنا جمع وتحليل البيانات من استخدامك للنظام لتحسين خدماتنا</p>
+            <p>12 يجب عليك الحفاظ على سرية بيانات حسابك وتجنب مشاركة معلومات تسجيل الدخول مع أي شخص</p>
+            <p>13 نحن غير مسؤولين عن أي أضرار أو خسائر قد تنجم عن استخدامك غير الصحيح للنظام</p>
+            <p>14 يحق لنا تحديد أو تغيير شروط الوصول إلى النظام في أي وقت</p>
+            <p>15 يجب أن توافق على تحديثات الشروط والأحكام الجديدة عند نشرها على الموقع</p>
+            <p>16 أنت تتحمل المسؤولية الكاملة عن أي محتوى تقدمه أو تنشره داخل النظام</p>
+            <p>17 يجب عليك إبلاغنا في حال اكتشاف أي انتهاكات أو مشكلات تتعلق بالنظام</p>
+            <button id="backToRegisterBtn">العودة للتسجيل</button>
+        </div>
     </main>
 
     <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        function generateRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        // تغيير الحقول عند اختيار "مشرف"
+        document.getElementById('role').addEventListener('change', function () {
+            const role = this.value;
+            if (role === 'مشرف') {
+                document.getElementById('username').value = generateRandomString(8);
+                document.getElementById('password').value = generateRandomString(12);
+                document.querySelector('button[type="submit"]').textContent = 'تقديم طلب'; // تغيير نص الزر
+                document.getElementById('username').setAttribute('readonly', 'true');
+                document.getElementById('password').setAttribute('readonly', 'true');
+            } else {
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+                document.querySelector('button[type="submit"]').textContent = 'تسجيل'; // إعادة نص الزر
+                document.getElementById('username').removeAttribute('readonly');
+                document.getElementById('password').removeAttribute('readonly');
+            }
+        });
+
+        // إظهار الشروط والأحكام عند الضغط على الرابط
+        document.getElementById('termsLink').addEventListener('click', function (e) {
             e.preventDefault();
-            
+            document.getElementById('registerFormContainer').style.display = 'none';
+            document.getElementById('termsContent').style.display = 'block';
+        });
+
+        // زر العودة للتسجيل
+        document.getElementById('backToRegisterBtn').addEventListener('click', function () {
+            document.getElementById('termsContent').style.display = 'none';
+            document.getElementById('registerFormContainer').style.display = 'block';
+        });
+
+        // الإجراءات عند تقديم النموذج
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            clearErrors(); // مسح الأخطاء السابقة
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value;
+            const phone = document.getElementById('phone').value;
+            const role = document.getElementById('role').value;
+
+            let isValid = true;
+
+            // تحقق من نطاق البريد الإلكتروني
+            if (!email.endsWith('@nu.edu.sa')) {
+                document.getElementById('emailError').textContent = 'البريد الإلكتروني يجب أن ينتهي بـ @nu.edu.sa';
+                isValid = false;
+            }
+
+            // تحقق من طول كلمة المرور
+            if (password.length < 8) {
+                document.getElementById('passwordError').textContent = 'كلمة السر يجب أن تحتوي على 8 أحرف أو أكثر.';
+                isValid = false;
+            }
+
+            // تحقق من رقم الهاتف
+            const phoneRegex = /^[0-9]*$/; // يعتبر صحيحًا إذا كان يحتوي على أرقام فقط
+            if (!phoneRegex.test(phone)) {
+                document.getElementById('phoneError').textContent = 'رقم الجوال يجب أن يتكون من أرقام فقط.';
+                isValid = false;
+            }
+
+            // تحقق من قبول الشروط والأحكام
+            if (!document.getElementById('termsCheckbox').checked) {
+                alert('عليك الموافقة على الشروط والأحكام للاستمرار.');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+                return; // منع إرسال النموذج إذا وجد أخطاء
+            }
+
+            e.preventDefault();
+
             const user = {
-                email: document.getElementById('email').value,
-                username: document.getElementById('username').value,
-                password: document.getElementById('password').value,
-                phone: document.getElementById('phone').value,
-                role: document.getElementById('role').value // إضافة الرول
+                email: email,
+                username: username,
+                password: password,
+                phone: phone,
+                role: role
             };
 
             // حفظ الدور في localStorage
@@ -138,22 +286,35 @@
                 },
                 body: JSON.stringify(user)
             })
-            .then(response => response.text())
-            .then(data => {
-                if (data === 'success') {
-                    alert('تم التسجيل بنجاح');
-                    window.location.href = 'login.html'; 
-                } else if (data === 'exists') {
-                    alert('اسم المستخدم موجود بالفعل');
-                } else {
-                    alert('حدث خطأ أثناء التسجيل: ' + data);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('حدث خطأ أثناء التسجيل.');
-            });
+                .then(response => response.text())
+                .then(data => {
+                    if (data === 'success') {
+                        if (role === 'مشرف') {
+                            alert('تم تقديم طلبك كمشرف. سيتم قبولك من المطورين وسيرسل لك الرمز خلال 24 ساعة على البريد الإلكتروني.');
+                        } else {
+                            alert('تم التسجيل بنجاح');
+                        }
+                        window.location.href = 'login.html';
+                    } else if (data === 'exists') {
+                        alert('اسم المستخدم موجود بالفعل');
+                    } else {
+                        alert('حدث خطأ أثناء التسجيل: ' + data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('حدث خطأ أثناء التسجيل.');
+                });
         });
+
+
+        function clearErrors() {
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('usernameError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('phoneError').textContent = '';
+        }
     </script>
+    <script src="translate.js"></script>
 </body>
 </html>
