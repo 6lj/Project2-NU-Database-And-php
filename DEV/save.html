@@ -80,6 +80,7 @@
             background-color: #b38a2b;
         }
     </style>
+     <script src="../track_visitor.js"></script> 
 </head>
 
 <body>
@@ -119,23 +120,24 @@
 <div id="message"></div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        fetch('../profile.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    document.getElementById('profile-data').innerHTML = `<p>خطأ في تحميل البيانات: ${data.error}</p>`;
-                    return;
-                }
-                updateDisplayedInfo(data);
-                loadAppointments();
-                saveAppointmentsToDatabase(); 
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-                document.getElementById('profile-data').innerHTML = '<p>فشل تحميل بيانات الملف الشخصي.</p>';
-            });
-    });
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('../profile.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                window.location.href = '../login.html'; 
+                return;
+            }
+            updateDisplayedInfo(data);
+            loadAppointments();
+            saveAppointmentsToDatabase(); 
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+           
+            window.location.href = '../login.html'; 
+        });
+});
 
     function updateDisplayedInfo(user) {
         document.getElementById('display-username').textContent = user.username;
