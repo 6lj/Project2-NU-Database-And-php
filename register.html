@@ -103,13 +103,13 @@
 
             <style>
                 .nav-link, .lang-button {
-                    cursor: pointer; /* Ensure the cursor is a pointer for all clickable elements */
-                    text-decoration: none; /* Remove the underline */
-                    color: inherit; /* Optional: inherits the text color from the parent */
+                    cursor: pointer;   
+                    text-decoration: none;     
+                    color: inherit;       
                 }
 
                     .nav-link:hover, .lang-button:hover {
-                        text-decoration: underline; /* Optional: Add underline on hover, if desired */
+                        text-decoration: underline;         
                     }
             </style>
         </div>
@@ -276,7 +276,7 @@
                 role: role
             };
 
-            // حفظ الدور في localStorage
+                     
             localStorage.setItem('userRole', user.role);
 
             fetch('register.php', {
