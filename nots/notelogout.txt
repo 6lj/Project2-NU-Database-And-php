@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <script src="logout.js" defer></script> <!-- تأكد من ربط logout.js هنا -->
+</head>
+<body>
+    <h1>مرحباً بك في صفحة المستخدم</h1>
+     <a href="#" id="logout-button" class="top-bar-link">تسجيل الخروج</a>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .login-form-container, .terms-content {
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #050505;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="phone"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #c49b3c;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #b39c3f; 
+        }
+
+        .terms {
+            margin-top: 30px;
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .terms-checkbox {
+            margin: 15px 0;
+            text-align: right;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+     <script src="track_visitor.js"></script> 
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <a href="welcome.html" class="top-bar-link">الصفحة الرئيسية</a>
+            <a href="login.html" class="login-btn">تسجيل الدخول</a>
+
+            <!--
+<a href="#" onclick="toggleLanguage();" class="lang-button">English</a>
+
+<style>
+    .nav-link, .lang-button {
+        cursor: pointer;   
+        text-decoration: none;     
+        color: inherit;       
+    }
+
+    .nav-link:hover, .lang-button:hover {
+        text-decoration: underline;         
+    }
+</style>
+-->
+            </style>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <img src="https://i.ibb.co/rMTRPrD/IMG-8440.jpg" alt="Logo" class="logo">
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="login-form-container" id="registerFormContainer">
+            <h1 class="arabic-title">التسجيل</h1>
+            <p class="arabic-subtitle">يرجى إدخال بياناتك لتسجيل جديد إلى النظام</p>
+            <form id="registerForm">
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="البريد الالكتروني" required oninvalid="this.setCustomValidity('ادخل المعلومات رجاءا')" oninput="this.setCustomValidity('')">
+                    <div id="emailError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="username" name="username" placeholder="اسم المستخدم" required oninvalid="this.setCustomValidity('ادخل المعلومات رجاءا')" oninput="this.setCustomValidity('')">
+                    <div id="usernameError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="كلمة السر" required oninvalid="this.setCustomValidity('ادخل المعلومات رجاءا')" oninput="this.setCustomValidity('')">
+                    <div id="passwordError" class="error-message"></div>
+                </div>
+                <div class="form-group" id="confirmPasswordGroup">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="إعادة كلمة السر" required oninvalid="this.setCustomValidity('ادخل المعلومات رجاءا')" oninput="this.setCustomValidity('')">
+                    <div id="confirmPasswordError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="phone" name="phone" placeholder="رقم الجوال" required oninvalid="this.setCustomValidity('ادخل المعلومات رجاءا')" oninput="this.setCustomValidity('')">
+                    <div id="phoneError" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">:</label>
+                    <select id="role" name="role" required oninvalid="this.setCustomValidity('ادخل المعلومات رجاءا')" oninput="this.setCustomValidity('')">
+                        <option value="">اختر </option>
+                        <option value="مريض">مريض</option>
+                        <option value="متدرب">متدرب</option>
+                        <option value="مشرف">مشرف</option>
+                    </select>
+                </div>
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="termsCheckbox" required oninvalid="this.setCustomValidity('اقبل الشروط اولا')" oninput="this.setCustomValidity('')">
+                    <label for="termsCheckbox">أوافق على <a href="#" id="termsLink">الشروط والأحكام</a></label>
+                </div>
+                <button type="submit">تسجيل</button>
+            </form>
+            <p style="margin-top: 15px;">لديك حساب بالفعل؟ <a href="login.html">سجل الدخول</a></p>
+        </div>
+
+        <div class="terms-content" id="termsContent" style="display: none;">
+            <h2>الشروط والأحكام</h2>
+            <p>1 يحق لنا رؤية جميع بياناتك المدخلة في النظام واستخدامها لأغراض تقديم الخدمات</p>
+            <p>2 استخدام بيانات مغلوطة قد يعرضك للمسائلة القانونية</p>
+            <p>3 لا يحق لك مسائلتنا قانونيًا بأي شكل من الأشكال</p>
+            <p>4 في حال سرقتك للكود أو الفكرة، يحق لنا مسائلتك بشكل قانوني</p>
+            <p>5 نحتفظ بالحق في تغيير هذه الشروط والأحكام في أي وقت</p>
+            <p>6 العبث بالنظام أو محاولة الهجوم يحق لنا مسائلتك بشكل قانوني وحجرك من دخول خدماتنا</p>
+            <p>7 انتحال العمل لأي جهة معنية دون أخذ موافقة المطورين يعرضك للمسائلة القانونية</p>
+            <p>8 يجب عليك استخدام هذا النظام فقط للأغراض المصرح بها وعدم استخدامه لأغراض غير قانونية</p>
+            <p>9 في حال حدوث أي خرق لهذه الشروط، يحق لنا إنهاء حسابك دون إشعار مسبق</p>
+            <p>10 نحتفظ بحقنا في اتخاذ الإجراءات القانونية اللازمة ضد أي انتهاك لهذه الشروط</p>
+            <p>11 يحق لنا جمع وتحليل البيانات من استخدامك للنظام لتحسين خدماتنا</p>
+            <p>12 يجب عليك الحفاظ على سرية بيانات حسابك وتجنب مشاركة معلومات تسجيل الدخول مع أي شخص</p>
+            <p>13 نحن غير مسؤولين عن أي أضرار أو خسائر قد تنجم عن استخدامك غير الصحيح للنظام</p>
+            <p>14 يحق لنا تحديد أو تغيير شروط الوصول إلى النظام في أي وقت</p>
+            <p>15 يجب أن توافق على تحديثات الشروط والأحكام الجديدة عند نشرها على الموقع</p>
+            <p>16 أنت تتحمل المسؤولية الكاملة عن أي محتوى تقدمه أو تنشره داخل النظام</p>
+            <p>17 يجب عليك إبلاغنا في حال اكتشاف أي انتهاكات أو مشكلات تتعلق بالنظام</p>
+            <button id="backToRegisterBtn">العودة للتسجيل</button>
+        </div>
+    </main>
+
+    <script>
+        function generateRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+        let previouslySelectedRole = ''; 
+
+document.getElementById('role').addEventListener('change', function () {
+    const role = this.value;
+
+    if (previouslySelectedRole === 'مشرف' && (role === 'مريض' || role === 'متدرب')) {
+
+        window.location.href = 'banned.html';
+        return;
+    }
+
+    previouslySelectedRole = role;
+
+    if (role === 'مشرف') {
+        document.getElementById('confirmPasswordGroup').style.display = 'none'; 
+    } else {
+        document.getElementById('confirmPasswordGroup').style.display = 'block'; 
+    }
+});
+        document.getElementById('role').addEventListener('change', function () {
+    const role = this.value;
+    if (role === 'مشرف') {
+
+        document.getElementById('confirmPasswordGroup').style.display = 'none'; 
+    } else {
+
+        document.getElementById('confirmPasswordGroup').style.display = 'block'; 
+    }
+});
+
+        document.getElementById('role').addEventListener('change', function () {
+
+    const role = this.value;
+    if (role === 'مشرف') {
+        document.getElementById('username').value = generateRandomString(8);
+        document.getElementById('password').value = generateRandomString(12);
+        document.querySelector('button[type="submit"]').textContent = 'تقديم طلب'; 
+        document.getElementById('username').setAttribute('readonly', 'true');
+        document.getElementById('password').setAttribute('readonly', 'true');
+    } else {
+
+        document.getElementById('username').removeAttribute('readonly');
+        document.getElementById('password').removeAttribute('readonly');
+
+        if (role === 'مريض' || role === 'متدرب') {
+
+        } else {
+
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        document.querySelector('button[type="submit"]').textContent = 'تسجيل'; 
+
+    }
+});
+
+        document.getElementById('termsLink').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('registerFormContainer').style.display = 'none';
+            document.getElementById('termsContent').style.display = 'block';
+        });
+
+        document.getElementById('backToRegisterBtn').addEventListener('click', function () {
+            document.getElementById('termsContent').style.display = 'none';
+            document.getElementById('registerFormContainer').style.display = 'block';
+        });
+
+document.getElementById('registerForm').addEventListener('submit', function (e) {
+    clearErrors(); 
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value; 
+    const username = document.getElementById('username').value;
+    const phone = document.getElementById('phone').value;
+    const role = document.getElementById('role').value;
+
+    let isValid = true;
+
+    if (!email.endsWith('@nu.edu.sa')) {
+        document.getElementById('emailError').textContent = 'البريد الإلكتروني يجب أن ينتهي بـ @nu.edu.sa';
+        isValid = false;
+    }
+
+    if (password.length < 8) {
+        document.getElementById('passwordError').textContent = 'كلمة السر يجب أن تحتوي على 8 أحرف أو أكثر.';
+        isValid = false;
+    }
+
+    if (password !== confirmPassword) {
+        document.getElementById('confirmPasswordError').textContent = 'كلمتا السر غير متطابقتين.';
+        isValid = false;
+    }
+
+    const phoneRegex = /^[0-9]*$/; 
+    if (!phoneRegex.test(phone)) {
+        document.getElementById('phoneError').textContent = 'رقم الجوال يجب أن يتكون من أرقام فقط.';
+        isValid = false;
+    }
+
+    if (!document.getElementById('termsCheckbox').checked) {
+        alert('عليك الموافقة على الشروط والأحكام للاستمرار.');
+        isValid = false;
+    }
+
+    if (!isValid) {
+        e.preventDefault();
+        return; 
+    }
+
+    e.preventDefault();
+
+    const user = {
+        email: email,
+        username: username,
+        password: password,
+        phone: phone,
+        role: role
+    };
+
+    localStorage.setItem('userRole', user.role);
+
+    fetch('php/register.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => response.text())
+        .then(data => {
+            if (data === 'success') {
+                if (role === 'مشرف') {
+                    alert('تم تقديم طلبك كمشرف. سيتم قبولك من المطورين وسيرسل لك الرمز خلال 24 ساعة على البريد الإلكتروني.');
+                } else {
+                    alert('تم التسجيل بنجاح');
+                }
+                window.location.href = 'login.html';
+            } else if (data === 'exists') {
+                alert('اسم المستخدم موجود بالفعل');
+            } else {
+                alert('حدث خطأ أثناء التسجيل: ' + data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('حدث خطأ أثناء التسجيل.');
+        });
+});
+
+        function clearErrors() {
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('usernameError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('phoneError').textContent = '';
+        }
+    </script>
+   <!-- <script src="translate.js"></script> -->
+</body>
+</html>

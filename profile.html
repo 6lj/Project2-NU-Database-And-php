@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-display {
+            text-align: right;
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-display p {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .appointments {
+            margin-top: 30px;
+        }
+
+        .appointment-item {
+            padding: 15px;
+            background-color: #f1f8e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointment-item p {
+            margin: 5px 0;
+        }
+
+        .appointment-item h4 {
+            color: #388e3c;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #c49b3c;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #b38a2b;
+        }
+    </style>
+     <script src="track_visitor.js"></script> 
+     <script src="logout.js" defer></script>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <a href="help.html" class="top-bar-link">المساعدة</a>
+            <a href="#" id="logout-button" class="top-bar-link">تسجيل الخروج</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <img src="https://i.ibb.co/rMTRPrD/IMG-8440.jpg" alt="New Logo" class="logo" style="margin-bottom: 10px;">
+            <nav class="nav">
+                <a href="Syetem.html" class="nav-link">الرئيسية</a>
+                <a href="profile.html" class="nav-link">الملف الشخصي</a>
+                <a href="Sections.html" class="nav-link">الأقسام</a>
+                <a href="contact.html" class="nav-link">تواصل معنا</a>
+                <a href="about.html" class="nav-link">عن النظام</a>
+               <!--
+<a href="#" onclick="toggleLanguage();" class="lang-button">English</a>
+-->                <style>
+                    .nav-link, .lang-button {
+                        cursor: pointer;   
+                        text-decoration: none;     
+                        color: inherit;       
+                    }
+
+                        .nav-link:hover, .lang-button:hover {
+                            text-decoration: underline;         
+                        }
+                </style>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h2>الملف الشخصي</h2>
+
+        <div class="info-display">
+            <p><strong>اسم المستخدم:</strong> <span id="display-username"></span></p>
+            <p><strong>البريد الإلكتروني:</strong> <span id="display-email"></span></p>
+            <p><strong>رقم الجوال:</strong> <span id="display-phone"></span></p>
+        </div>
+    </div>
+    <a href="delete.html" class="link-button">تعديل وقت الحجز</a>
+    <div class="appointments" id="appointments">
+        <h2>المواعيد الحالية</h2>
+        <div id="appointment-list"></div>
+    </div>
+    
+    </main>
+
+    <script>
+   
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('php/profile.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(`خطأ في تحميل البيانات: ${data.error}`);
+                        return;
+                    }
+                    updateDisplayedInfo(data);
+                    displayAppointments();
+                })
+                .catch(error => {
+                    console.error('خطأ في تحميل البيانات:', error);
+                });
+        });
+
+        function updateDisplayedInfo(user) {
+            document.getElementById('display-username').textContent = user.username;
+            document.getElementById('display-email').textContent = user.email;
+            document.getElementById('display-phone').textContent = user.phone;
+        }
+
+       
+        function displayAppointments() {
+            fetch('DEV/retrieve_appointments.php')
+                .then(response => response.json())
+                .then(data => {
+                    const appointmentsContainer = document.getElementById('appointment-list');
+                    appointmentsContainer.innerHTML = ''; 
+
+                    
+                    const userEmail = document.getElementById('display-email').textContent;
+
+                    
+                    if (data.length === 0) {
+                        appointmentsContainer.innerHTML = '<p>لا توجد مواعيد.</p>';
+                    } else {
+                       
+                        const filteredAppointments = data.filter(appointment => appointment.email === userEmail);
+
+                        
+                        if (filteredAppointments.length > 0) {
+                            filteredAppointments.forEach(appointment => {
+                                const appointmentDiv = document.createElement('div');
+                                appointmentDiv.classList.add('appointment-item');
+                                appointmentDiv.innerHTML = `
+                                    <p><strong>رقم الموعد:</strong> ${appointment.appointment_id}</p>
+                                    <p><strong>التاريخ:</strong> ${appointment.date}</p>
+                                    <p><strong>الوقت:</strong> ${appointment.time}</p>
+                                    <p><strong>القسم:</strong> ${appointment.department}</p>
+                                    <p><strong>الحالة:</strong> ${appointment.status}</p>
+                                `;
+                                appointmentsContainer.appendChild(appointmentDiv);
+                            });
+                        } else {
+                            appointmentsContainer.innerHTML = '<p> لا توجد مواعيد محجوزة.</p>';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('حدث خطأ أثناء استرجاع المواعيد:', error);
+                    const appointmentsContainer = document.getElementById('appointment-list');
+                    appointmentsContainer.innerHTML = 'حدث خطأ أثناء استرجاع المواعيد.';
+                });
+        }
+    </script>
+     <!-- <script src="translate.js"></script> -->
+</body>
+
+</html>

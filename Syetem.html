@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام جدولة وحجز المواعيد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .portal-button {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 10px;
+            background-color: #063261;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .portal-button:hover {
+            background-color: #033469;
+        }
+        
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #FF0000; 
+        }
+
+    </style>
+    
+    <script src="track_visitor.js"></script>
+    <script src="logout.js" defer></script>
+
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <a href="../profile.html" class="top-bar-link">الملف الشخصي</a>
+            <a href="../help.html" class="top-bar-link">المساعدة</a>
+            <a href="../login.html" id="logout-button" class="top-bar-link">تسجيل الخروج</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <img src="https://i.ibb.co/rMTRPrD/IMG-8440.jpg" alt="New Logo" class="logo" style="margin-bottom: 10px;">
+            <nav class="nav">
+                <a href="../Syetem.html" class="nav-link">الرئيسية</a>
+                <a href="../appointment.html" class="nav-link">حجز موعد</a>
+                <a href="../Sections.html" class="nav-link">الأقسام</a>
+                <a href="../contact.html" class="nav-link">تواصل معنا</a>
+                <a href="../about.html" class="nav-link">عن النظام</a>
+               <!--
+<a href="#" onclick="toggleLanguage();" class="lang-button">English</a>
+-->
+
+                <style>
+                    .nav-link, .lang-button {
+                        cursor: pointer;   
+                        text-decoration: none; 
+                        color: inherit; 
+                    }
+
+                        .nav-link:hover, .lang-button:hover {
+                            text-decoration: underline; 
+                        }
+                </style>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="wave-bg"></div>
+        <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
+            <h1 class="arabic-title">نظام جدولة وحجز المواعيد</h1>
+            <p class="arabic-subtitle"> </p>
+        </div>
+
+        <div class="portal-container">
+            <a href="../appointment.html" class="portal-button">حجز موعد طبي</a>
+            <a href="../trainee.html" class="portal-button">متدرب</a>
+            <a href="../supervisor.html" class="portal-button" id="supervisor-button">المشرف</a>
+        </div>
+
+        <p class="note" id="supervisor-note" style="display: none;">ملاحظة: صفحة المشرف تظهر مؤقتًا عند تسجيل الدخول، وبعد ذلك لن تظهر بسبب احترازات أمنية.</p>
+    </main>
+
+    <script>
+        const currentUrl = window.location.href;
+
+        if (!currentUrl.includes('supervisor')) {
+            const supervisorButton = document.getElementById('supervisor-button');
+            if (supervisorButton) {
+                supervisorButton.style.display = 'none';
+            }
+        } else {
+        
+            const supervisorNote = document.getElementById('supervisor-note');
+            if (supervisorNote) {
+                supervisorNote.style.display = 'block';
+            }
+        }
+    </script>
+   <!-- <script src="translate.js"></script> -->
+
+</body>
+</html>

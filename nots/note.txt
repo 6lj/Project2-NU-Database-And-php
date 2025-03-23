@@ -1,0 +1,32 @@
+
+                <!--
+<a href="#" onclick="toggleLanguage();" class="lang-button">English</a>
+
+<style>
+    .nav-link, .lang-button {
+        cursor: pointer;   
+        text-decoration: none;     
+        color: inherit;       
+    }
+
+    .nav-link:hover, .lang-button:hover {
+        text-decoration: underline;         
+    }
+</style>
+-->
+                
+                 
+                <style>
+                    .nav-link, .lang-button {
+                        cursor: pointer;   
+                        text-decoration: none;     
+                        color: inherit;       
+                    }
+                
+                    .nav-link:hover, .lang-button:hover {
+                        text-decoration: underline;         
+                    }
+                </style>
+ </main>
+   <!-- <script src="translate.js"></script> -->
+
