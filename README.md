@@ -1,7 +1,6 @@
 How Make Database Work in Our Project 
 ==========================
 Download:
-[VScode](https://code.visualstudio.com/) , 
 [php 8.4 ](https://windows.php.net/download#php-8.4) , 
 [Xampp 8.2.12](https://www.apachefriends.org/download.html)
 
