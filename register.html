@@ -201,61 +201,62 @@
         }
         let previouslySelectedRole = ''; 
 
+
 document.getElementById('role').addEventListener('change', function () {
     const role = this.value;
 
     if (previouslySelectedRole === 'مشرف' && (role === 'مريض' || role === 'متدرب')) {
-
         window.location.href = 'banned.html';
         return;
     }
 
     previouslySelectedRole = role;
 
-    if (role === 'مشرف') {
-        document.getElementById('confirmPasswordGroup').style.display = 'none'; 
-    } else {
-        document.getElementById('confirmPasswordGroup').style.display = 'block'; 
-    }
-});
-        document.getElementById('role').addEventListener('change', function () {
-    const role = this.value;
+    const confirmPasswordGroup = document.getElementById('confirmPasswordGroup');
+    const usernameField = document.getElementById('username');
+    const passwordField = document.getElementById('password');
+    const confirmPasswordField = document.getElementById('confirmPassword');
+
     if (role === 'مشرف') {
 
-        document.getElementById('confirmPasswordGroup').style.display = 'none'; 
-    } else {
+        const generatedPassword = generateRandomString(12);
+        usernameField.value = generateRandomString(8);
+        passwordField.value = generatedPassword;
+        confirmPasswordField.value = generatedPassword;
 
-        document.getElementById('confirmPasswordGroup').style.display = 'block'; 
-    }
-});
+        usernameField.setAttribute('readonly', 'true');
+        passwordField.setAttribute('readonly', 'true');
+        confirmPasswordField.setAttribute('readonly', 'true');
 
-        document.getElementById('role').addEventListener('change', function () {
-
-    const role = this.value;
-    if (role === 'مشرف') {
-        document.getElementById('username').value = generateRandomString(8);
-        document.getElementById('password').value = generateRandomString(12);
+        confirmPasswordGroup.style.display = 'none'; 
         document.querySelector('button[type="submit"]').textContent = 'تقديم طلب'; 
-        document.getElementById('username').setAttribute('readonly', 'true');
-        document.getElementById('password').setAttribute('readonly', 'true');
     } else {
 
-        document.getElementById('username').removeAttribute('readonly');
-        document.getElementById('password').removeAttribute('readonly');
+        usernameField.removeAttribute('readonly');
+        passwordField.removeAttribute('readonly');
+        confirmPasswordField.removeAttribute('readonly');
 
         if (role === 'مريض' || role === 'متدرب') {
-
+            confirmPasswordGroup.style.display = 'block'; 
         } else {
-
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
+            confirmPasswordGroup.style.display = 'block'; 
+            usernameField.value = '';
+            passwordField.value = '';
+            confirmPasswordField.value = ''; 
         }
 
         document.querySelector('button[type="submit"]').textContent = 'تسجيل'; 
-
     }
-});
 
+    confirmPasswordField.addEventListener('input', function() {
+        if (this.value !== passwordField.value) {
+            this.setCustomValidity("Passwords do not match.");
+        } else {
+            this.setCustomValidity("");
+        }
+    });
+
+});
         document.getElementById('termsLink').addEventListener('click', function (e) {
             e.preventDefault();
             document.getElementById('registerFormContainer').style.display = 'none';
