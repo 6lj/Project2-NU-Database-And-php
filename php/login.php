@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
     if ($_SESSION['role'] === "مشرف") {
         header('Location: ../Syetem.html/supervisor');
     } else {
-        header('Location: ../Syetem.html');
+        header('Location: ../verification_code.html/login');
     }
     exit;
 } else {

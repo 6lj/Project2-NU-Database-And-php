@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كود التحقق</title>
+    <p class="info-message">This is a local. If published, it should display A message indicating that the registration was successful or that the system was entered in email and sms.</p>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+            height: 100vh; 
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+        #verification-code {
+            font-size: 24px;
+            color: green;
+            margin-bottom: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div id="verification-code"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadLatestUserVerificationCode(); 
+        });
+
+        function loadLatestUserVerificationCode() {
+            fetch('../php/auth.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+
+                        const latestUser = data.data[data.data.length - 1]; 
+
+                        if (latestUser) {
+                            const verificationCodeElement = document.getElementById('verification-code');
+                            verificationCodeElement.textContent = `كود التحقق: ${latestUser.verification_code}`;
+
+                            localStorage.setItem('verification_code', latestUser.verification_code);
+                        } else {
+                            console.log('لا يوجد مستخدمون.');
+                        }
+                    } else {
+                        console.error('فشل جلب البيانات:', data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('خطأ في جلب البيانات:', error);
+                });
+        }
+    </script>
+</body>
+</html>

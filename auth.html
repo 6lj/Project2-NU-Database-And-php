@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كود التحقق</title>
+    <p class="info-message">This is a local. If published, it should display appointment information along with the code in email and sms.</p>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+            height: 100vh; 
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+        #verification-code {
+            font-size: 24px;
+            color: green;
+            margin-bottom: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div id="verification-code"></div>
+
+    <script>
+        let currentEmail = '';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('php/profile.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('خطأ في تحميل البيانات:', data.error);
+                        return;
+                    }
+                    currentEmail = data.email; 
+                    loadUsers(); 
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+        });
+
+        function loadUsers() {
+            fetch('php/auth.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        data.data.forEach(user => {
+
+                            if (user.email === currentEmail) {
+                                const verificationCodeElement = document.getElementById('verification-code');
+                                verificationCodeElement.textContent = `كود التحقق: ${user.verification_code}`;
+
+                                localStorage.setItem('user_data', JSON.stringify(user));
+                                localStorage.setItem('verification_code', user.verification_code);
+                            }
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('خطأ:', error);
+                });
+        }
+
+    </script>
+</body>
+</html>

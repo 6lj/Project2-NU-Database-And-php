@@ -32,10 +32,13 @@ $check_result = $check_stmt->get_result();
 if ($check_result->num_rows > 0) {
     echo "exists";
 } else {
-    $sql = "INSERT INTO users (email, username, password, phone, role) VALUES (?, ?, ?, ?, ?)";
+
+    $verification_code = sprintf("%04d", mt_rand(0, 9999));
+
+    $sql = "INSERT INTO users (email, username, password, phone, role, verification_code) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bind_param("sssss", $email, $username, $password, $phone, $role); 
+    $stmt->bind_param("ssssss", $email, $username, $password, $phone, $role, $verification_code); 
 
     if ($stmt->execute()) {
         echo "success"; 

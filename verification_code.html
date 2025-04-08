@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدخال كود التحقق</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            height: 100%;
+            padding-top: 20px; 
+        }
+
+        .form-container {
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #c49b3c; 
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #b39230; 
+        }
+
+        .error-message {
+            color: red;
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="top-bar-content">
+        <a href="Syetem.html" class="top-bar-link">الصفحة الرئيسية</a>
+        <a href="register.html" class="login-btn">تسجيل </a>
+    </div>
+</div>
+
+<header class="header">
+    <div class="header-content">
+        <img src="https://i.ibb.co/rMTRPrD/IMG-8440.jpg" alt="Logo" class="logo">
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="form-container">
+        <h1>أدخل كود التحقق</h1>
+        <div class="form-group">
+            <input type="text" id="verification-input" placeholder="الكود هنا" required>
+        </div>
+        <button id="verify-button">تحقق</button>
+        <p id="message" class="error-message"></p>
+    </div>
+</main>
+
+<script>
+    const savedVerificationCode = localStorage.getItem('verification_code');
+    const currentUrl = window.location.href;
+
+    document.getElementById('verify-button').addEventListener('click', function() {
+        const inputCode = document.getElementById('verification-input').value;
+
+        if (inputCode.length !== 4 || isNaN(inputCode)) {
+            document.getElementById('message').textContent = 'يرجى إدخال كود تحقق مكون من 4 أرقام فقط.';
+            document.getElementById('message').style.display = 'block'; 
+            return;
+        }
+
+        if (inputCode === savedVerificationCode) {
+
+            if (currentUrl.includes("/login")) {
+
+                window.location.href = 'index.html';
+            } else {
+
+                window.location.href = 'System.html';
+            }
+        } else {
+            document.getElementById('message').textContent = 'الكود المدخل غير صحيح.';
+            document.getElementById('message').style.display = 'block'; 
+        }
+    });
+</script>
+</body>
+</html>
