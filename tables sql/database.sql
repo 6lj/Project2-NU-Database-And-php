@@ -25,7 +25,7 @@ CREATE TABLE trainees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
-    appointment DATE NOT NULL,
+    appointment DATE UNIQUE NOT NULL,  
     assigned_to VARCHAR(255),
     accepted TINYINT DEFAULT 0,
     patient_name VARCHAR(255) NOT NULL
