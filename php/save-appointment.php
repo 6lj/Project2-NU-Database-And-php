@@ -1,7 +1,23 @@
 <?php
 
+header('Content-Type: application/json');
+
 $config = json_decode(file_get_contents("config.json"), true);
+
+if ($config === null || !isset($config['database'])) {
+    http_response_code(500);
+    echo json_encode(array("error" => "Failed to load database configuration. Ensure config.json exists and is valid."));
+    exit();
+}
+
 $dbConfig = $config['database'];
+
+if (!isset($dbConfig['host']) || !isset($dbConfig['user']) || !isset($dbConfig['password']) || !isset($dbConfig['dbname'])) {
+    http_response_code(500);
+    echo json_encode(array("error" => "Incomplete database configuration in config.json. Missing host, user, password, or dbname."));
+    exit();
+}
+
 $servername = $dbConfig['host'];
 $username = $dbConfig['user'];
 $password = $dbConfig['password'];
@@ -11,32 +27,68 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     http_response_code(500);
-    echo json_encode(array("error" => "Connection failed: " . $conn->connect_error));
+    echo json_encode(array("error" => "Database connection failed: " . $conn->connect_error));
     exit();
 }
 
-$appointmentData = json_decode(file_get_contents("php://input"), true);
+$json_data = file_get_contents("php://input");
+$appointmentData = json_decode($json_data, true);
+
+if ($appointmentData === null && $json_data !== '') {
+     http_response_code(400);
+     echo json_encode(array("error" => "Invalid JSON received."));
+     $conn->close();
+     exit();
+}
 
 if (!isset($appointmentData['id']) || !isset($appointmentData['date']) || !isset($appointmentData['time']) || !isset($appointmentData['department']) || !isset($appointmentData['status'])) {
     http_response_code(400);
-    echo json_encode(array("error" => "Missing required data."));
+    echo json_encode(array("error" => "Missing required data. Ensure 'id', 'date', 'time', 'department', and 'status' are provided."));
     $conn->close();
     exit();
 }
 
-$stmt = $conn->prepare("INSERT INTO appointments (id, date, time, department, status) VALUES (?, ?, ?, ?, ?)");
+$checkSql = "SELECT COUNT(*) FROM appointments WHERE date = ? AND time = ?";
+$checkStmt = $conn->prepare($checkSql);
 
-if ($stmt === false) {
+if ($checkStmt === false) {
     http_response_code(500);
-    echo json_encode(array("error" => "Prepare failed: " . $conn->error));
+    echo json_encode(array("error" => "Prepare check failed: " . $conn->error));
     $conn->close();
     exit();
 }
 
-$stmt->bind_param("sssss", $appointmentData['id'], $appointmentData['date'], $appointmentData['time'], $appointmentData['department'], $appointmentData['status']);
+$checkStmt->bind_param("ss", $appointmentData['date'], $appointmentData['time']);
+$checkStmt->execute();
+$checkStmt->bind_result($count);
+$checkStmt->fetch();
+$checkStmt->close();
 
-if ($stmt->execute()) {
-    http_response_code(201);
+if ($count > 0) {
+
+    http_response_code(409); 
+    echo json_encode(array(
+        "error" => " هذا الموعد  " . $appointmentData['date'] . " at " . $appointmentData['time'] . " لقد تم حجزه مسبقا"
+    ));
+    $conn->close();
+    exit();
+}
+
+$insertSql = "INSERT INTO appointments (id, date, time, department, status) VALUES (?, ?, ?, ?, ?)";
+$insertStmt = $conn->prepare($insertSql);
+
+if ($insertStmt === false) {
+    http_response_code(500);
+    echo json_encode(array("error" => "Prepare insert failed: " . $conn->error));
+    $conn->close();
+    exit();
+}
+
+$insertStmt->bind_param("sssss", $appointmentData['id'], $appointmentData['date'], $appointmentData['time'], $appointmentData['department'], $appointmentData['status']);
+
+if ($insertStmt->execute()) {
+
+    http_response_code(201); 
     echo json_encode(array(
         "message" => "Appointment saved successfully.",
         "appointment" => array(
@@ -48,10 +100,12 @@ if ($stmt->execute()) {
         )
     ));
 } else {
-    http_response_code(500);
-    echo json_encode(array("error" => "Execute failed: " . $stmt->error));
+
+    http_response_code(500); 
+    echo json_encode(array("error" => "Execute insert failed: " . $insertStmt->error));
 }
 
-$stmt->close();
+$insertStmt->close();
 $conn->close();
+
 ?>
