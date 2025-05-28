@@ -31,6 +31,8 @@ if ($conn->connect_error) {
     exit();
 }
 
+$conn->set_charset("utf8mb4"); 
+
 $json_data = file_get_contents("php://input");
 $appointmentData = json_decode($json_data, true);
 
@@ -65,10 +67,9 @@ $checkStmt->fetch();
 $checkStmt->close();
 
 if ($count > 0) {
-
     http_response_code(409); 
     echo json_encode(array(
-        "error" => " هذا الموعد  " . $appointmentData['date'] . " at " . $appointmentData['time'] . " لقد تم حجزه مسبقا"
+        "error" => " هذا الموعد  " . htmlspecialchars($appointmentData['date']) . " at " . htmlspecialchars($appointmentData['time']) . " لقد تم حجزه مسبقا"
     ));
     $conn->close();
     exit();
